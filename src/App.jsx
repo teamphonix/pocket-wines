@@ -80,6 +80,7 @@ function WineCard({ wine }) {
             <div>
               <h4>Featured pairing</h4>
               <strong>{wine.featuredDish.name}</strong>
+              <small>{wine.featuredDish.section} · Blue-Liv menu verified</small>
               <p>{wine.featuredDish.why}</p>
             </div>
           </section>
@@ -131,7 +132,7 @@ function FullWineCard({ wine, onClose }) {
             </div>
           </section>
           <section className="modal-study-panel">
-            <div className="modal-dish-card"><img src={wine.featuredDish.image} alt={wine.featuredDish.name} /><h4>Featured pairing</h4><strong>{wine.featuredDish.name}</strong><p>{wine.featuredDish.why}</p></div>
+            <div className="modal-dish-card"><img src={wine.featuredDish.image} alt={wine.featuredDish.name} /><h4>Featured pairing</h4><strong>{wine.featuredDish.name}</strong><small>{wine.featuredDish.section} · Blue-Liv menu verified</small><p>{wine.featuredDish.why}</p><p className="menu-source">Menu line: {wine.featuredDish.sourceTitle}</p></div>
             <div><h4>Sales line</h4><p>{wine.salesLine}</p></div>
             <div><h4>Nose</h4><p>{wine.nose}</p></div>
             <div><h4>Palate</h4><p>{wine.palate}</p></div>

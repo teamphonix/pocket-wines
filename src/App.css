@@ -119,6 +119,8 @@ h1 { font-size: clamp(3.15rem, 7vw, 5.4rem); line-height: .95; margin-bottom: 16
 .dish-feature { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; }
 .dish-feature img { width: 72px; height: 72px; border-radius: 16px; object-fit: cover; border: 1px solid var(--line-bright); }
 .dish-feature strong { display: block; color: #fff6dd; margin-bottom: 3px; }
+.dish-feature small, .modal-dish-card small { display: block; color: #d7e8ff; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 5px; }
+.menu-source { margin-top: 8px !important; color: var(--muted) !important; font-size: .82rem; border-left: 2px solid var(--line-bright); padding-left: 9px; }
 .rows { display: grid; gap: 10px; margin-top: 14px; }
 .wine-row { display: grid; grid-template-columns: minmax(220px, 1.15fr) minmax(260px, 1.35fr) minmax(160px, .7fr) auto auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 18px; padding: 13px; background: rgba(255,255,255,.04); }
 .wine-row div { display: grid; gap: 4px; }
