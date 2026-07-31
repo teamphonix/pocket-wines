@@ -289,6 +289,68 @@ function overview(w) {
   return `${w.name} is a ${w.varietal} from ${w.region}. Use it when a guest asks for ${w.category.includes('White') || w.category.includes('Rosé') || w.category.includes('Sparkling') ? 'freshness, lift, and a clean pairing path' : 'depth, texture, and a bottle with presence'}.`;
 }
 
+const bluDishes = {
+  oysters: { name: 'Oysters', section: 'Jewels of the Sea', image: '/foods/oysters.jpg' },
+  truffledTuna: { name: 'Truffled Tuna', section: 'Jewels of the Sea', image: '/foods/truffled-tuna.jpg' },
+  redSnapperCeviche: { name: 'Red Snapper Ceviche', section: 'Jewels of the Sea', image: '/foods/red-snapper-ceviche.jpg' },
+  lobsterCocktail: { name: 'Maine Lobster Cocktail', section: 'Jewels of the Sea', image: '/foods/maine-lobster-cocktail.jpg' },
+  bluRoll: { name: 'The Blu Roll', section: 'Sushi Rolls', image: '/foods/the-blu-roll.jpg' },
+  misoCod: { name: 'Miso Black Cod', section: 'Skewers', image: '/foods/miso-black-cod.jpg' },
+  burrata: { name: 'Burrata', section: 'Blu Classics', image: '/foods/burrata.jpg' },
+  carpaccio: { name: 'Carpaccio', section: 'Blu Classics', image: '/foods/carpaccio.jpg' },
+  bolognese: { name: 'Bolognese', section: 'House-Made Pastas', image: '/foods/bolognese.jpg' },
+  gnocchi: { name: 'Ricotta Gnocchi', section: 'House-Made Pastas', image: '/foods/ricotta-gnocchi.jpg' },
+  lobsterFraDiavolo: { name: 'Lobster Fra Diavolo', section: 'House-Made Pastas', image: '/foods/lobster-fra-diavolo.jpg' },
+  chickenParm: { name: 'Organic Chicken Parm', section: 'Land & Sea', image: '/foods/organic-chicken-parm.jpg' },
+  salmon: { name: 'Faroe Islands Salmon', section: 'Land & Sea', image: '/foods/faroe-islands-salmon.jpg' },
+  branzino: { name: 'Branzino', section: 'Land & Sea', image: '/foods/branzino.jpg' },
+  lamb: { name: 'Australian Lamb', section: 'Land & Sea', image: '/foods/australian-lamb.jpg' },
+  skirtSteak: { name: 'Westholme Wagyu Skirt Steak', section: 'Steaks', image: '/foods/westholme-wagyu-skirt-steak.jpg' },
+  filet: { name: 'Filet Mignon', section: 'Steaks', image: '/foods/filet-mignon-steak.jpg' },
+  delmonico: { name: 'Delmonico', section: 'Steaks', image: '/foods/delmonico-steak.jpg' },
+  porterhouse: { name: 'Porterhouse', section: 'Steaks', image: '/foods/porterhouse-steak.jpg' },
+  tomahawk: { name: 'Prime 40oz Tomahawk', section: 'Steaks', image: '/foods/prime-40oz-tomahawk-steak.jpg' },
+  wagyuA5: { name: 'Japanese A5 Wagyu', section: 'Steaks', image: '/foods/japanese-a5-wagyu-steak.jpg' },
+  carrotCake: { name: 'Classic Carrot Cake', section: 'Desserts', image: '/foods/classic-carrot-cake.jpg' },
+  tiramisu: { name: "Blu's Tiramisu", section: 'Desserts', image: '/foods/blu-s-tiramisu.jpg' },
+  granita: { name: 'Granita', section: 'Desserts', image: '/foods/granita.jpg' },
+};
+
+function withPairing(dish, why) {
+  return { ...dish, why };
+}
+
+function dishPairing(w) {
+  const v = w.varietal.toLowerCase();
+  const c = w.category.toLowerCase();
+  const s = w.subcategory.toLowerCase();
+  const n = w.name.toLowerCase();
+  const p = Number(w.price);
+
+  if (c.includes('sweet') || v.includes('port') || n.includes('yquem') || v.includes('beerenauslese') || v.includes('tokaji') || v.includes('sherry')) {
+    if (v.includes('port') || v.includes('pedro') || v.includes('sherry')) return withPairing(bluDishes.tiramisu, 'sweet fortified depth loves coffee, cocoa, cream, and dessert richness without feeling thin.');
+    return withPairing(bluDishes.carrotCake, 'honeyed sweetness and bright acidity lift spice, cream cheese, and warm cake flavors.');
+  }
+  if (c.includes('sparkling')) return withPairing(p >= 175 ? bluDishes.lobsterCocktail : bluDishes.oysters, 'bubbles, acid, and mineral snap reset the palate against chilled seafood and saline raw-bar flavors.');
+  if (c.includes('rosé')) return withPairing(bluDishes.redSnapperCeviche, 'rosé fruit and freshness bridge citrus, herbs, and delicate raw fish while staying refreshing.');
+  if (v.includes('riesling') || v.includes('gewürz') || v.includes('grüner')) return withPairing(bluDishes.lobsterFraDiavolo, 'aromatic fruit and acidity handle spice, tomato, and seafood without overpowering the dish.');
+  if (v.includes('sauvignon') || v.includes('albari') || v.includes('muscadet') || v.includes('melon') || v.includes('loureiro')) return withPairing(bluDishes.truffledTuna, 'citrus, herbs, and mineral edges sharpen tuna, ponzu, and fresh raw-bar flavors.');
+  if (v.includes('chardonnay') || v.includes('carricante') || v.includes('timorasso') || v.includes('chenin')) return withPairing(v.includes('chardonnay') && p > 150 ? bluDishes.doverSole || bluDishes.branzino : bluDishes.branzino, 'texture and acidity match the fish while the wine’s citrus and orchard-fruit notes keep it lifted.');
+  if (v.includes('pinot noir') || s.includes('pinot')) return withPairing(p > 300 ? bluDishes.wagyuA5 : bluDishes.salmon, 'silky red fruit and gentle tannin work with richer fish, umami, and seared edges.');
+  if (v.includes('sangiovese') || s.includes('chianti') || n.includes('brunello')) return withPairing(bluDishes.bolognese, 'Sangiovese acidity cuts tomato and pasta richness while savory herbs echo the sauce.');
+  if (v.includes('nebbiolo') || n.includes('barolo') || n.includes('barbaresco')) return withPairing(bluDishes.lamb, 'Nebbiolo tannin and floral-earthy notes are classic with lamb, herbs, and roasted savory flavors.');
+  if (v.includes('tempranillo') || s.includes('spain') || v.includes('garnacha') || v.includes('mencía') || v.includes('monastrell')) return withPairing(bluDishes.porkBelly || bluDishes.skirtSteak, 'Spanish red fruit, spice, and savory oak tones are built for char, fat, and grill flavor.');
+  if (v.includes('syrah') || v.includes('mourvèdre') || v.includes('grenache')) return withPairing(bluDishes.lamb, 'pepper, dark fruit, and savory Rhône-style weight match lamb and spice beautifully.');
+  if (v.includes('malbec') || v.includes('carmenère')) return withPairing(bluDishes.skirtSteak, 'plush dark fruit and smooth tannin make this an easy steak recommendation.');
+  if (v.includes('cabernet') || c.includes('bordeaux') || v.includes('bordeaux')) {
+    if (p >= 500) return withPairing(bluDishes.tomahawk, 'a serious bottle deserves a centerpiece steak; structure, dark fruit, and tannin meet char and marbling.');
+    if (p >= 200) return withPairing(bluDishes.delmonico, 'full body and polished tannin stand up to ribeye richness and seared crust.');
+    return withPairing(bluDishes.filet, 'dark fruit and structure add depth to filet while keeping the pairing clean and classic.');
+  }
+  if (c.includes('large format')) return withPairing(bluDishes.porterhouse, 'large-format bottles are built for the table, and a shareable steak gives the wine a matching centerpiece.');
+  return withPairing(bluDishes.burrata, 'a flexible pairing: cream, herbs, and acidity give the wine an easy first-course lane.');
+}
+
 export const wines = rawWines.map((row, idx) => {
   const [category, subcategory, name, region, varietal, price] = row;
   const exact = profileMap[varietal] || Object.entries(profileMap).find(([k]) => varietal.includes(k))?.[1] || ['red and black fruit, florals, spice, and mineral notes','balanced fruit, texture, acidity, and a clean finish'];
@@ -304,6 +366,7 @@ export const wines = rawWines.map((row, idx) => {
     terroir: regionHint(region),
     nose: exact[0],
     palate: exact[1],
+    featuredDish: dishPairing(wine),
     overview: overview(wine),
   };
 });

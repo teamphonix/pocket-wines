@@ -1,6 +1,8 @@
 import { wines } from '../src/wines.js';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
-const requiredFields = ['category', 'subcategory', 'name', 'varietal', 'region', 'price', 'priceBand', 'salesLine', 'funFact', 'terroir', 'nose', 'palate', 'overview', 'studyStatus'];
+const requiredFields = ['category', 'subcategory', 'name', 'varietal', 'region', 'price', 'priceBand', 'salesLine', 'funFact', 'terroir', 'nose', 'palate', 'overview', 'studyStatus', 'featuredDish'];
 const problems = [];
 const profileDrafts = [];
 
@@ -12,6 +14,11 @@ for (const wine of wines) {
   }
   if (wine.studyStatus?.toLowerCase().includes('pending')) {
     profileDrafts.push(wine.name);
+  }
+  if (!wine.featuredDish?.name || !wine.featuredDish?.image || !wine.featuredDish?.why) {
+    problems.push(`${wine.name} missing complete featured dish pairing`);
+  } else if (!existsSync(join(process.cwd(), 'public', wine.featuredDish.image.replace(/^\//, '')))) {
+    problems.push(`${wine.name} missing featured dish image file ${wine.featuredDish.image}`);
   }
   if (wine.nose === wine.palate) {
     problems.push(`${wine.name} has identical nose and palate`);

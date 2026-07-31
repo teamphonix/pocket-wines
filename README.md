@@ -9,6 +9,7 @@ A mobile-first flashcard study site for Blu Livingston's wines by the bottle.
 - Price range filters: less than $100, $100–$200, $200–$300, $300–$400, $400–$500, and $500+.
 - Search by wine name, grape, region, or menu section.
 - Staff-friendly sales lines, fun facts, terroir notes, nose, palate, and overview.
+- Featured Blu dish pairing for every bottle, with local dish imagery copied into Pocket Wines so the app feels like a Blue-Liv extension without touching the Blue-Liv site.
 
 ## Local development
 

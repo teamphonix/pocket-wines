@@ -58,6 +58,10 @@ function WineCard({ wine }) {
             <h3>{wine.name}</h3>
             <p>{wine.varietal}</p>
             <p>{wine.region}</p>
+            <div className="pairing-pill">
+              <img src={wine.featuredDish.image} alt="" />
+              <span>Pairs with {wine.featuredDish.name}</span>
+            </div>
           </div>
           <span className="tap-hint">Tap to study the somm side</span>
         </div>
@@ -70,6 +74,14 @@ function WineCard({ wine }) {
           <section>
             <h4>Sales line</h4>
             <p>{wine.salesLine}</p>
+          </section>
+          <section className="dish-feature">
+            <img src={wine.featuredDish.image} alt={wine.featuredDish.name} />
+            <div>
+              <h4>Featured pairing</h4>
+              <strong>{wine.featuredDish.name}</strong>
+              <p>{wine.featuredDish.why}</p>
+            </div>
           </section>
           <section>
             <h4>Nose</h4>
@@ -114,10 +126,12 @@ function FullWineCard({ wine, onClose }) {
               <p><strong>Price</strong><span>${wine.price} · {wine.priceBand}</span></p>
               <p><strong>Grape / Style</strong><span>{wine.varietal}</span></p>
               <p><strong>Region / Vintage</strong><span>{wine.region}</span></p>
+              <p><strong>Featured dish</strong><span>{wine.featuredDish.name} · {wine.featuredDish.section}</span></p>
               <p><strong>Study status</strong><span>{wine.studyStatus}</span></p>
             </div>
           </section>
           <section className="modal-study-panel">
+            <div className="modal-dish-card"><img src={wine.featuredDish.image} alt={wine.featuredDish.name} /><h4>Featured pairing</h4><strong>{wine.featuredDish.name}</strong><p>{wine.featuredDish.why}</p></div>
             <div><h4>Sales line</h4><p>{wine.salesLine}</p></div>
             <div><h4>Nose</h4><p>{wine.nose}</p></div>
             <div><h4>Palate</h4><p>{wine.palate}</p></div>
@@ -164,9 +178,9 @@ export default function App() {
   return (
     <main>
       <section className="hero">
-        <div className="eyebrow">Blu Livingston Bottle Study</div>
+        <div className="eyebrow">Blu Livingston Bottle Study · Pocket Extension</div>
         <h1>Pocket Wines</h1>
-        <p className="lede">Flash cards for the bottles on the Blu list: name, price, grape and region on the front — sales language, fun facts, terroir, nose, and palate on the back.</p>
+        <p className="lede">A Blu-style pocket guide for the bottle list: flip through wine names, prices, grapes, regions, sommelier notes, and a featured Blu dish pairing for every bottle.</p>
         <div className="hero-actions">
           <a href="#cards" className="primary-action">Start studying</a>
           <button className="ghost-action" onClick={() => setView(view === 'cards' ? 'list' : 'cards')}>{view === 'cards' ? 'List view' : 'Card view'}</button>
@@ -214,6 +228,7 @@ export default function App() {
                 <article className="wine-row" key={wine.id}>
                   <div><strong>{wine.name}</strong><span>{wine.varietal} · {wine.region}</span></div>
                   <p>{wine.salesLine}</p>
+                  <span className="row-pairing"><img src={wine.featuredDish.image} alt="" /> {wine.featuredDish.name}</span>
                   <b>${wine.price}</b>
                   <button className="open-card-button" onClick={() => setSelectedWine(wine)}>Open card</button>
                 </article>
