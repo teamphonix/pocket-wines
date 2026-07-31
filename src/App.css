@@ -66,10 +66,26 @@ h1 { margin: 4px 0 12px; font-size: clamp(3rem, 12vw, 8rem); line-height: .86; l
 .card-back h4 { color: #e7c873; margin: 0 0 4px; text-transform: uppercase; letter-spacing: .07em; font-size: .72rem; }
 .card-back p { margin: 0; color: #e7dfd1; font-size: .92rem; }
 .rows { display: grid; gap: 10px; margin-top: 14px; }
-.wine-row { display: grid; grid-template-columns: 1.2fr 1.5fr auto; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 13px; background: rgba(255,255,255,.04); }
+.wine-row { display: grid; grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 1.5fr) auto auto; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 13px; background: rgba(255,255,255,.04); }
 .wine-row div { display: grid; gap: 4px; }
 .wine-row span, .wine-row p { color: #cfc5ad; margin: 0; }
 .wine-row b { color: #e7c873; font-size: 1.2rem; }
+.open-card-button, .close-button { border: 1px solid rgba(120, 230, 255, .35); background: rgba(120, 230, 255, .1); color: #eafaff; border-radius: 999px; font-weight: 900; min-height: 42px; padding: 9px 14px; white-space: nowrap; }
+.modal-backdrop { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.76); backdrop-filter: blur(12px); display: grid; place-items: center; padding: 16px; }
+.modal-card { width: min(980px, 100%); max-height: min(92dvh, 900px); overflow: auto; border-radius: 28px; border: 1px solid rgba(231, 200, 115, .35); background: linear-gradient(155deg, rgba(23,24,29,.98), rgba(7,7,8,.99)); box-shadow: 0 24px 90px rgba(0,0,0,.62); }
+.modal-header { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; padding: 18px; border-bottom: 1px solid rgba(255,255,255,.12); background: rgba(7,7,8,.92); backdrop-filter: blur(14px); }
+.modal-header span { color: #78e6ff; text-transform: uppercase; letter-spacing: .07em; font-weight: 900; font-size: .72rem; }
+.modal-header h2 { margin: 4px 0 0; line-height: 1.05; }
+.modal-body { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(300px, 1.2fr); gap: 18px; padding: 18px; }
+.modal-front-panel, .modal-study-panel { border: 1px solid rgba(255,255,255,.12); border-radius: 22px; background: rgba(255,255,255,.035); padding: 16px; }
+.modal-front-panel .bottle-wrap { height: 270px; }
+.modal-facts { display: grid; gap: 10px; }
+.modal-facts p { display: grid; gap: 2px; margin: 0; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.1); }
+.modal-facts strong, .modal-study-panel h4 { color: #e7c873; text-transform: uppercase; letter-spacing: .07em; font-size: .72rem; }
+.modal-facts span, .modal-study-panel p { color: #efe7d7; margin: 0; }
+.modal-study-panel { display: grid; gap: 14px; }
+.modal-study-panel div { padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.modal-study-panel h4 { margin: 0 0 4px; }
 footer { margin-top: 44px; padding: 22px 4px; display: grid; gap: 5px; color: #9d9589; border-top: 1px solid rgba(255,255,255,.14); }
 footer strong { color: #e7c873; }
 
@@ -84,4 +100,10 @@ footer strong { color: #e7c873; }
   .flash-card, .flip-surface { min-height: 540px; }
   .wine-row { grid-template-columns: 1fr auto; }
   .wine-row p { grid-column: 1 / -1; }
+  .open-card-button { grid-column: 1 / -1; width: 100%; }
+  .modal-backdrop { align-items: end; padding: 8px; }
+  .modal-card { max-height: 94dvh; border-radius: 24px 24px 18px 18px; }
+  .modal-header { align-items: center; }
+  .modal-body { grid-template-columns: 1fr; padding: 12px; }
+  .modal-front-panel .bottle-wrap { height: 230px; }
 }

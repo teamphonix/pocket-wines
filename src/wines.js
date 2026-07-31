@@ -298,6 +298,7 @@ export const wines = rawWines.map((row, idx) => {
     priceBand: priceBand(price),
     imageKind: 'study-label-art',
     imageAlt: `${name} study bottle illustration`,
+    studyStatus: 'Profile-based draft pending bottle-source fine-comb',
     salesLine: salesLine(wine),
     funFact: funFact(wine),
     terroir: regionHint(region),

@@ -94,6 +94,43 @@ function WineCard({ wine }) {
   );
 }
 
+function FullWineCard({ wine, onClose }) {
+  if (!wine) return null;
+
+  return (
+    <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="selected-wine-title" onClick={onClose}>
+      <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+        <div className="modal-header">
+          <div>
+            <span>{wine.category} · {wine.subcategory}</span>
+            <h2 id="selected-wine-title">{wine.name}</h2>
+          </div>
+          <button className="close-button" onClick={onClose} aria-label="Close full wine card">Close</button>
+        </div>
+        <div className="modal-body">
+          <section className="modal-front-panel">
+            <BottleArt wine={wine} />
+            <div className="modal-facts">
+              <p><strong>Price</strong><span>${wine.price} · {wine.priceBand}</span></p>
+              <p><strong>Grape / Style</strong><span>{wine.varietal}</span></p>
+              <p><strong>Region / Vintage</strong><span>{wine.region}</span></p>
+              <p><strong>Study status</strong><span>{wine.studyStatus}</span></p>
+            </div>
+          </section>
+          <section className="modal-study-panel">
+            <div><h4>Sales line</h4><p>{wine.salesLine}</p></div>
+            <div><h4>Nose</h4><p>{wine.nose}</p></div>
+            <div><h4>Palate</h4><p>{wine.palate}</p></div>
+            <div><h4>Terroir</h4><p>{wine.terroir}</p></div>
+            <div><h4>Fun fact</h4><p>{wine.funFact}</p></div>
+            <div><h4>Overview</h4><p>{wine.overview}</p></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Stat({ label, value }) {
   return <div className="stat"><strong>{value}</strong><span>{label}</span></div>;
 }
@@ -103,6 +140,7 @@ export default function App() {
   const [category, setCategory] = useState('All categories');
   const [priceBand, setPriceBand] = useState('All prices');
   const [view, setView] = useState('cards');
+  const [selectedWine, setSelectedWine] = useState(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -177,6 +215,7 @@ export default function App() {
                   <div><strong>{wine.name}</strong><span>{wine.varietal} · {wine.region}</span></div>
                   <p>{wine.salesLine}</p>
                   <b>${wine.price}</b>
+                  <button className="open-card-button" onClick={() => setSelectedWine(wine)}>Open card</button>
                 </article>
               ))}
             </div>
@@ -188,6 +227,7 @@ export default function App() {
         <strong>Pocket Wines</strong>
         <span>Built as private staff study material from Blu Livingston menu screenshots. Bottle art is local study-label art until real product-photo assets are reviewed.</span>
       </footer>
+      <FullWineCard wine={selectedWine} onClose={() => setSelectedWine(null)} />
     </main>
   );
 }

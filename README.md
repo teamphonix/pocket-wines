@@ -23,6 +23,16 @@ npm run dev
 npm run build
 ```
 
+## Accuracy workflow
+
+The site now separates "complete enough to study" from "fully bottle-source verified." Run this audit before deploying future data updates:
+
+```bash
+npm run audit:wines
+```
+
+Current notes are intentionally marked as `Profile-based draft pending bottle-source fine-comb` until every bottle's producer tech sheet, importer note, or trusted wine reference has been checked. The next data pass should replace the profile-generated nose, palate, sales line, fun fact, and terroir copy with bottle-specific sourced notes.
+
 ## Data notes
 
 The current wine records were transcribed from menu screenshots supplied from Blu Livingston. Bottle visuals are local study-label illustrations so the site does not depend on hotlinked retailer images. A later asset pass can replace those with reviewed local real bottle photos and provenance.
